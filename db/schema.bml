@@ -1,0 +1,97 @@
+Table suppliers {
+  id integer [pk, increment]
+  name text [not null]
+  current_permit_id integer [not null, ref: > supplier_permits.id]
+  address text
+  phone text
+  email text
+  website text
+}
+
+Table supplier_permits {
+  id integer [pk, increment]
+  supplier_id integer [not null, ref: > suppliers.id]
+  permit text [not null]
+  issue_date text [not null]
+  updated_date text [not null]
+}
+
+Table products {
+  id integer [pk, increment]
+  name text [not null]
+  type text
+  package_size real [not null]
+  unit text [not null]
+  supplier_id integer [ref: > suppliers.id]
+}
+
+Table transactions {
+  id integer [pk, increment]
+  type text [not null]
+  date text [not null]
+  comments text
+}
+
+Table transaction_items {
+  id integer [pk, increment]
+  transaction_id integer [not null, ref: > transactions.id]
+  product_id integer [not null, ref: > products.id]
+  quantity integer [not null]
+  barcode text
+}
+
+Table orders {
+  id integer [pk, increment]
+  invoice text [not null]
+  date text [not null]
+  status text [not null, default: 'pending']
+  supplier_id integer [ref: > suppliers.id]
+  comments text
+}
+
+Table order_items {
+  id integer [pk, increment]
+  order_id integer [not null, ref: > orders.id]
+  product_id integer [not null, ref: > products.id]
+  quantity integer [not null]
+}
+
+Table inventory {
+  id integer [pk, increment]
+  product_id integer [not null, ref: > products.id]
+  date text [not null]
+  previous_existence real [not null]
+  bought real [not null]
+  consumed real [not null]
+}
+
+Table authorized_buying_quantities {
+  id integer [pk, increment]
+  product_id integer [not null, ref: > products.id]
+  authorized_quantity integer [not null]
+  year integer [not null]
+  date text [not null]
+}
+
+Table field_usages {
+  id integer [pk, increment]
+  product_id integer [not null, ref: > products.id]
+  quantity integer [not null]
+  date text [not null]
+  location_id integer [not null, ref: > locations.id]
+  comments text
+}
+
+Table locations {
+  id integer [pk, increment]
+  name text [not null]
+}
+
+Table reports {
+  id integer [pk, increment]
+  date text [not null]
+  observations text [not null]
+  representative text [not null]
+  place text [not null]
+  comments text
+}

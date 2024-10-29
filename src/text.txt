@@ -1,0 +1,15 @@
+add data to this table
+
+CREATE TABLE IF NOT EXISTS authorized_buying_quantities (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    category_id INTEGER NOT NULL,
+    authorized_quantity INTEGER NOT NULL,
+    year INTEGER NOT NULL,
+    date TEXT NOT NULL CHECK (date LIKE '____-__-__'),
+    FOREIGN KEY (category_id) REFERENCES product_categories(id)
+);
+
+on date use the date for today
+
+
+
