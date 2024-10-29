@@ -83,7 +83,6 @@ def main():
     tabview.add("Formato 1")
     tabview.add("Formato 2")
     tabview.add("Formato 3")
-    tabview.set("")
 
     frame1 = CTkFrame(tabview.tab("Formato 1"), width=500, height=600, corner_radius=15)
     frame1.pack(pady=20, padx=20, fill="both", expand=True)
